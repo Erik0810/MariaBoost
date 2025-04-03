@@ -1,0 +1,206 @@
+body {
+    background-color: #F4D3D8; /* Muted Pastel Pink */
+    color: #5A7D57; /* Olive Green */
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 16px;
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    max-width: 390px;
+    margin: 0 auto;
+}
+
+.week-tracker {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.days-container {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    margin: -4px -4px 24px -4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    pointer-events: none;
+}
+
+.days-container::-webkit-scrollbar {
+    display: none;
+}
+
+.day-box {
+    flex: 0 0 calc(100% / 7);
+    padding: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.day-box.current::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background-color: #4C6B4C;
+    border-radius: 2px;
+}
+
+.day-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5A7D57;
+}
+
+.day-date {
+    font-size: 12px;
+    color: #4C6B4C;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #4C6B4C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: white;
+    font-size: 16px;
+    position: relative;
+}
+
+.day-box.checked .checkbox {
+    background-color: #4C6B4C;
+}
+
+.day-box.checked .checkbox::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.progress-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-top: 16px;
+}
+
+.chart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 16px;
+}
+
+#workoutDonutChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.prize-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #D4A017;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.message-input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4C6B4C;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #5A7D57;
+    background-color: white;
+    transition: border-color 0.2s ease;
+}
+
+.message-input:focus {
+    outline: none;
+    border-color: #2C5F2D;
+    box-shadow: 0 0 10px rgba(76, 107, 76, 0.2);
+}
+
+.message-input::placeholder {
+    color: #8DAA91;
+}
+
+.workout-button {
+    background-color: #4C6B4C;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(76, 107, 76, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+.workout-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 4px rgba(76, 107, 76, 0.2);
+}
+
+/* iOS touch improvements */
+@supports (-webkit-touch-callout: none) {
+    .workout-button {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    .message-input {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+}
