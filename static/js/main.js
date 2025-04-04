@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle today's workout
     function toggleTodayWorkout() {
         const todayStr = getTodayString();
+        const workoutButton = document.getElementById('workoutButton');
             
         const dayBox = Array.from(daysContainer.children)
             .find(box => box.classList.contains('current'));
@@ -112,7 +113,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dayBox) {
             const currentMessage = messageInput.value.trim();
             
+            const isCompleted = !currentWorkouts[todayStr].completed;
             dayBox.classList.toggle('checked');
+            if (isCompleted) {
+                workoutButton.classList.add('completed');
+                workoutButton.textContent = 'Lødde har trent😇';
+            } else {
+                workoutButton.classList.remove('completed');
+                workoutButton.textContent = 'Registrer økt😈';
+            }
             currentWorkouts[todayStr] = currentWorkouts[todayStr] || {};
             currentWorkouts[todayStr].completed = !currentWorkouts[todayStr].completed;
             currentWorkouts[todayStr].message = currentMessage;
@@ -160,12 +169,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Update button state on load
+    function updateButtonState(workouts) {
+        const todayStr = getTodayString();
+        const workoutButton = document.getElementById('workoutButton');
+        if (workouts[todayStr]?.completed) {
+            workoutButton.classList.add('completed');
+            workoutButton.textContent = 'Lødde har trent😇';
+        } else {
+            workoutButton.classList.remove('completed');
+            workoutButton.textContent = 'Registrer økt😈';
+        }
+    }
+
     // Load initial data
     fetch(`/workouts`)
         .then(response => response.json())
         .then(data => {
             console.log('Received workout data:', data);
             createDayBoxes(data.dates, data.workouts);
+            updateButtonState(data.workouts);
             checkPrizeReveal();
         })
         .catch(error => {

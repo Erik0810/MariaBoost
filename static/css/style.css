@@ -196,10 +196,16 @@ h2 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     width: 100%;
 }
-
 .workout-button:active {
     transform: scale(0.95);
     box-shadow: 0 1px 4px rgba(76, 107, 76, 0.2);
+}
+
+.workout-button.completed {
+    background-color: white;
+    box-shadow: inset 0 0 0 2px #4C6B4C;
+    color: #4C6B4C;
+    border-radius: 25px;
 }
 
 /* Prize Popup */
@@ -270,6 +276,13 @@ h2 {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         user-select: none;
+    }
+    
+    .workout-button.completed {
+        background-color: #ffffff;
+        border-color:#2C5F2D;
+        border-radius: 20px;
+        color: white;
     }
     
     .message-input {
