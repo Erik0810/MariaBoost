@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(`Day ${dateStr} is checked`);
             }
             
+            if (workoutsData[dateStr]?.message) {
+                dayBox.classList.add('has-message');
+                const dots = document.createElement('div');
+                dots.className = 'message-dots';
+                dots.innerHTML = '<span></span><span></span><span></span>';
+                dayBox.appendChild(dots);
+            }
+            
             const dayName = document.createElement('div');
             dayName.className = 'day-name';
             dayName.textContent = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][date.getDay() === 0 ? 6 : date.getDay() - 1];
