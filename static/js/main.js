@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const prizeImage = document.getElementById('prizeImage');
     const prizeName = document.getElementById('prizeName');
     const prizeDescription = document.getElementById('prizeDescription');
+    const workoutPopup = document.getElementById('workoutPopup');
+    const workoutMessage = document.getElementById('workoutMessageContent');
     
     let currentWorkouts = {};
 
@@ -48,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
     prizePopup.addEventListener('click', function(e) {
         if (e.target === prizePopup) {
             hidePrizePopup();
+        }
+    });
+
+    workoutPopup.addEventListener('click', function(e) {
+        if (e.target === workoutPopup) {
+            workoutPopup.classList.remove('active');
         }
     });
 
@@ -103,6 +111,16 @@ document.addEventListener('DOMContentLoaded', function() {
             dayBox.appendChild(dayDate);
             dayBox.appendChild(checkbox);
             daysContainer.appendChild(dayBox);
+            
+            // Add click handler for previous days
+            if (dateStr !== todayStr) {
+                dayBox.addEventListener('click', function() {
+                    if (workoutsData[dateStr]?.message) {
+                        workoutMessage.textContent = workoutsData[dateStr].message;
+                        workoutPopup.classList.add('active');
+                    }
+                });
+            }
 
             if (dateStr === todayStr && workoutsData[dateStr]?.message) {
                 messageInput.value = workoutsData[dateStr].message;
