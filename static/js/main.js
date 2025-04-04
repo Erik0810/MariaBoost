@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function updateWorkoutGif(completedCount) {
+        const workoutGif = document.getElementById('workoutGif');
+        let gifName = 'Workout_Zero.gif';
+        if (completedCount >= 3) {
+            gifName = 'Workout_Completed.gif';
+        } else if (completedCount === 2) {
+            gifName = 'Workout_Two.gif';
+        } else if (completedCount === 1) {
+            gifName = 'Workout_One.gif';
+        }
+        workoutGif.src = `/static/images/${gifName}`;
+    }
+
     const daysContainer = document.querySelector('.days-container');
     const workoutButton = document.getElementById('workoutButton');
     const messageInput = document.getElementById('workoutMessage');
@@ -131,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             updateDonutChart(donutChart, currentWorkouts);
+            const completedCount = Object.values(currentWorkouts).filter(w => w.completed).length;
+            updateWorkoutGif(completedCount);
             checkPrizeReveal();
             
             fetch('/toggle_workout', {
@@ -189,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Received workout data:', data);
             createDayBoxes(data.dates, data.workouts);
             updateButtonState(data.workouts);
+            const completedCount = Object.values(data.workouts).filter(w => w.completed).length;
+            updateWorkoutGif(completedCount);
             checkPrizeReveal();
         })
         .catch(error => {

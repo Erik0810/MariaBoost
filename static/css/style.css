@@ -24,9 +24,9 @@ body {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 50px;
     margin-bottom: 24px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .days-container {
@@ -118,7 +118,8 @@ h2 {
     position: relative;
     width: 200px;
     height: 200px;
-    margin-bottom: 16px;
+    margin-top: -20px;
+    margin-bottom: -10px;
 }
 
 #workoutDonutChart {
