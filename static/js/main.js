@@ -157,9 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (isCompleted) {
                 workoutButton.classList.add('completed');
                 workoutButton.textContent = 'Lødde har trent😇';
+                messageInput.value = '';
+                messageInput.classList.add('disabled');
             } else {
                 workoutButton.classList.remove('completed');
                 workoutButton.textContent = 'Registrer økt😈';
+                messageInput.classList.remove('disabled');
             }
             currentWorkouts[todayStr] = currentWorkouts[todayStr] || {};
             currentWorkouts[todayStr].completed = !currentWorkouts[todayStr].completed;

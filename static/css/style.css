@@ -1,3 +1,9 @@
+/* Disabled message input style */
+#workoutMessage.disabled {
+    background-color: #b0afaf;
+    pointer-events: none;
+}
+
 body {
     background-color: #F4D3D8; /* Muted Pastel Pink */
     color: #5A7D57; /* Olive Green */
