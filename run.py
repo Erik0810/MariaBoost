@@ -2,6 +2,11 @@ import os
 from app import app
 import sqlite3
 
+# Load environment variables from .env file if it exists
+if os.path.exists('.env'):
+    from dotenv import load_dotenv
+    load_dotenv()
+
 def init_db():
     """Initialize database if it doesn't exist"""
     if not os.path.exists(app.config['DATABASE']):
@@ -21,6 +26,8 @@ def init_db():
     else:
         print("Using existing database")
 
+application = app
+
 if __name__ == '__main__':
     print("Starting application...")
     
@@ -33,7 +40,3 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
 
-# Load environment variables from .env file if it exists
-if os.path.exists('.env'):
-    from dotenv import load_dotenv
-    load_dotenv()
