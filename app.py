@@ -8,19 +8,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['DATABASE'] = os.path.join(app.root_path, os.getenv('DATABASE', 'workouts.db'))
 
-def init_db():
-    """Initialize database (only used for first-time setup)"""
-    if not os.path.exists(app.config['DATABASE']):
-        db = sqlite3.connect(app.config['DATABASE'])
-        try:
-            with open('schema.sql', 'r') as f:
-                db.executescript(f.read())
-            db.commit()
-        except Exception as e:
-            print(f"Error initializing database: {e}")
-            db.rollback()
-        finally:
-            db.close()
 
 def get_db():
     if 'db' not in g:
@@ -188,5 +175,4 @@ def get_current_prize():
     return jsonify({'error': 'No prize found for current week'}), 404
 
 if __name__ == '__main__':
-    init_db()
     app.run(debug=True)
