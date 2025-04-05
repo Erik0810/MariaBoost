@@ -5,7 +5,8 @@ from datetime import datetime, timedelta
 from prizes import prize_manager
 
 app = Flask(__name__)
-app.config['DATABASE'] = os.path.join(app.root_path, 'workouts.db')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['DATABASE'] = os.path.join(app.root_path, os.getenv('DATABASE', 'workouts.db'))
 
 def init_db():
     """Initialize database (only used for first-time setup)"""
